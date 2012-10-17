@@ -98,9 +98,9 @@
 @property(nonatomic,strong) UIColor *textColor;
 #else
 @property(nonatomic, assign) NSObject<HPGrowingTextViewDelegate> *delegate;
-@property(nonatomic, assign) NSString *text;
-@property(nonatomic, assign) UIFont *font;
-@property(nonatomic, assign) UIColor *textColor;
+@property(nonatomic, copy) NSString *text;
+@property(nonatomic, retain) UIFont *font;
+@property(nonatomic, retain) UIColor *textColor;
 #endif
 
 @property(nonatomic) UITextAlignment textAlignment;    // default is UITextAlignmentLeft
