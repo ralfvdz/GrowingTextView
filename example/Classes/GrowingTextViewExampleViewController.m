@@ -29,6 +29,15 @@
 
 @implementation GrowingTextViewExampleViewController
 
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+    [textView release];
+    [containerView release];
+    
+    [super dealloc];
+}
+#endif
 
 -(id)init
 {
@@ -52,7 +61,13 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
+    
+#if __has_feature(objc_arc)
 	self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+#else
+    self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]] autorelease];
+#endif
+    
     self.view.backgroundColor = [UIColor colorWithRed:219.0f/255.0f green:226.0f/255.0f blue:237.0f/255.0f alpha:1];
 	
     containerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 40, 320, 40)];
@@ -81,6 +96,7 @@
             
     UIImage *rawBackground = [UIImage imageNamed:@"MessageEntryBackground.png"];
     UIImage *background = [rawBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
+
     UIImageView *imageView = [[UIImageView alloc] initWithImage:background];
     imageView.frame = CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height);
     imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -91,6 +107,11 @@
     [containerView addSubview:imageView];
     [containerView addSubview:textView];
     [containerView addSubview:entryImageView];
+    
+#if !__has_feature(objc_arc)
+    [imageView release];
+    [entryImageView release];
+#endif
 
     UIImage *sendBtnBackground = [[UIImage imageNamed:@"MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
     UIImage *selectedSendBtnBackground = [[UIImage imageNamed:@"MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];

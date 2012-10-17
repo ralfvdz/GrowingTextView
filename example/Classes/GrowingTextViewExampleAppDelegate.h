@@ -34,8 +34,14 @@
     GrowingTextViewExampleViewController *viewController;
 }
 
+#if __has_feature(objc_arc)
 @property (nonatomic, strong) IBOutlet UIWindow *window;
 @property (nonatomic, strong) GrowingTextViewExampleViewController *viewController;
+#else
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) GrowingTextViewExampleViewController *viewController;
+#endif
+
 
 @end
 

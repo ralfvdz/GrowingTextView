@@ -47,6 +47,15 @@
 @synthesize animateHeightChange;
 @synthesize returnKeyType;
 
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+    [internalTextView release];
+    
+    [super dealloc];
+}
+#endif
+
 // having initwithcoder allows us to use HPGrowingTextView in a Nib. -- aob, 9/2011
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
