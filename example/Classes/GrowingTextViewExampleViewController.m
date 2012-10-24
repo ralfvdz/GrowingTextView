@@ -29,15 +29,18 @@
 
 @implementation GrowingTextViewExampleViewController
 
-#if !__has_feature(objc_arc)
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+#if !__has_feature(objc_arc)
+   
     [textView release];
     [containerView release];
     
     [super dealloc];
-}
 #endif
+}
 
 -(id)init
 {
