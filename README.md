@@ -1,7 +1,7 @@
 HPGrowingTextView
 =================
 
-NOTE: This fork support both ARC and non-ARC projects. Uses compiler preprocessor to determine whether Automatic Reference Counting (ARC) is being used.
+NOTE: This fork supports both ARC and non-ARC projects. Uses compiler preprocessor to determine whether Automatic Reference Counting (ARC) is being used.
 
 Multi-line/Autoresizing UITextView similar to SMS-app. The example project also even looks like Apple's version.
 
